@@ -1,3 +1,4 @@
+import { useAuthStore } from '@/stores/auth'
 import AuthView from '@/views/AuthView.vue'
 import HomeView from '@/views/HomeView.vue'
 import TicketDetailsView from '@/views/TicketViews/TicketDetailsView.vue'
@@ -12,14 +13,17 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: HomeView,
+      meta: { requiresAuth: true },
     },
     {
       path: '/my-tickets',
       component: TicketListView,
+      meta: { requiresAuth: true },
     },
     {
       path: '/my-tickets/:id',
       component: TicketDetailsView,
+      meta: { requiresAuth: true },
     },
     {
       path: '/login',
@@ -34,6 +38,15 @@ const router = createRouter({
       component: VerifyTokenView,
     },
   ],
+})
+
+router.beforeEach((to, _, next) => {
+  const auth = useAuthStore()
+  if (to.meta.requiresAuth && !auth.token) {
+    next('/login')
+  } else {
+    next()
+  }
 })
 
 export default router
