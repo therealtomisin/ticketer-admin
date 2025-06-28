@@ -1,14 +1,21 @@
 <template>
-  <form @submit.prevent="handleLogin" class="space-y-4">
-    <input v-model="email" placeholder="Email" class="w-full p-2 border rounded" />
-    <input
-      v-model="password"
-      type="password"
-      placeholder="Password"
-      class="w-full p-2 border rounded"
-    />
-    <button type="submit" class="bg-indigo-600 text-white px-4 py-2 rounded">Login</button>
-  </form>
+  <div class="space-y-4">
+    <form @submit.prevent="handleLogin" class="space-y-4">
+      <input v-model="email" placeholder="Email" class="w-full p-2 border rounded" />
+      <input
+        v-model="password"
+        type="password"
+        placeholder="Password"
+        class="w-full p-2 border rounded"
+      />
+      <button type="submit" class="bg-indigo-600 text-white px-4 py-2 rounded">Login</button>
+    </form>
+
+    <p class="text-sm text-gray-600">
+      Don’t have an account?
+      <router-link to="/signup" class="text-indigo-600 hover:underline">Sign up</router-link>
+    </p>
+  </div>
 </template>
 
 <script setup lang="ts">

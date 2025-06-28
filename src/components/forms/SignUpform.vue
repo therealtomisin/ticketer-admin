@@ -37,16 +37,11 @@ const handleSignup = async () => {
     alert('Passwords do not match')
     return
   }
-  console.log('the detais >> ', {
-    fn: firstName.value,
-    ln: lastName.value,
-    email: email.value,
-  })
 
   try {
     const signup = await auth.signup(firstName.value, lastName.value, email.value, password.value)
     if (signup.success) {
-      router.push('/dashboard')
+      router.push('/verify')
     }
   } catch (e: unknown) {
     if (e instanceof Error) {

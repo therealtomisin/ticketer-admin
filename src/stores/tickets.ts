@@ -15,7 +15,7 @@ export const useTicketsStore = defineStore('tickets', {
       title: string
       content: string
       status: string
-      createdt: Date
+      createdAt: Date
     }) {
       this.ticket = ticket
     },
