@@ -211,7 +211,7 @@ export const useTicketsStore = defineStore('tickets', {
         console.log('created comment >>>', data.createComment.comment)
 
         this.ticket.comments = [
-          ...this.ticket.comments.filter((c) => c.id !== tempId),
+          ...this.ticket.comments.filter((c: any) => c.id !== tempId),
           data.createComment.comment,
         ].sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime())
       } catch (error) {
@@ -219,7 +219,7 @@ export const useTicketsStore = defineStore('tickets', {
           if (ticket.id === ticketId) {
             return {
               ...ticket,
-              comments: ticket.comments.filter((c) => c.id !== tempId),
+              comments: ticket.comments.filter((c: any) => c.id !== tempId),
             }
           }
           return ticket
