@@ -36,7 +36,7 @@ const handleLogin = async () => {
     const instance = $toast.success('Login Succesfully!')
     instance.dismiss()
     if (login.success) {
-      router.push('/tickets')
+      router.push('/')
     } else {
       if (login.message.includes('not verified')) {
         $toast.error('Please verify your email before logging in.')
