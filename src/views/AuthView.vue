@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen flex justify-center items-center bg-gray-50">
+  <div class="min-h-screen flex justify-center items-center bg-gray-50 p-4">
     <div class="w-full max-w-md bg-white shadow-xl rounded-xl p-8">
       <h1 class="text-2xl font-bold mb-2 text-center">
         {{ isLogin ? 'Login' : 'Sign Up' }}

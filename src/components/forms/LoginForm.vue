@@ -12,7 +12,7 @@
     </form>
 
     <p class="text-sm text-gray-600">
-      Don’t have an account?
+      Don't have an account?
       <router-link to="/signup" class="text-indigo-600 hover:underline">Sign up</router-link>
     </p>
   </div>
@@ -21,7 +21,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { useAuthStore } from '@/stores/auth'
+import { useAuthStore } from '../../stores/auth'
 import { useToast } from 'vue-toast-notification'
 
 const email = ref('')
@@ -36,9 +36,14 @@ const handleLogin = async () => {
     const instance = $toast.success('Login Succesfully!')
     instance.dismiss()
     if (login.success) {
-      router.push('/')
+      router.push('/tickets')
     } else {
-      $toast.error('Login failed!')
+      if (login.message.includes('not verified')) {
+        $toast.error('Please verify your email before logging in.')
+        router.push('/verify')
+      } else {
+        $toast.error(login.message || 'Login failed!')
+      }
     }
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (e) {

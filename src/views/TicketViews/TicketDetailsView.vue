@@ -228,6 +228,7 @@ const editingStatus = ref(false)
 const localStatus = ref<string>('') // For status editing
 
 // Use computed property for reactive ticket data
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const ticket = computed<any | null>(() => ticketStore.ticket)
 
 // Initialize local status when ticket loads
@@ -277,6 +278,7 @@ const updateTicketStatus = async () => {
   try {
     await ticketStore.updateTicket(ticket.value.id, { status: localStatus.value })
     editingStatus.value = false
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     console.error('Failed to update ticket status:', error)
     // Revert to original status if update fails

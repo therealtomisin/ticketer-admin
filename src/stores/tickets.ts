@@ -63,7 +63,7 @@ export const useTicketsStore = defineStore('tickets', {
             id
             title
             status
-            created_at
+            createdAt
           }
         }
       `
@@ -117,6 +117,21 @@ export const useTicketsStore = defineStore('tickets', {
           }
         }
       `
+      // const CREATE_TICKET = gql`
+      //   mutation CreateTicket($input: CreateTicketInput!) {
+      //     createTicket(input: $input) {
+      //       ticket {
+      //         id
+      //         ticketKey
+      //         title
+      //         content
+      //         media
+      //       }
+      //       errors
+      //     }
+      //   }
+      // `
+
       const { data } = await apolloClient.mutate({
         mutation: CREATE_TICKET,
         variables: { input: { title, content, media: images } },

@@ -51,7 +51,7 @@
                 {{ ticket.status }}
               </span>
             </td>
-            <td class="px-4 py-2">{{ formatDate(ticket.created_at) }}</td>
+            <td class="px-4 py-2">{{ formatDate(ticket.createdAt) }}</td>
           </tr>
         </tbody>
       </table>
@@ -89,13 +89,19 @@ const router = useRouter()
 const totalTickets = ref(0)
 const activeTickets = ref(0)
 const closedTickets = ref(0)
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const recentTickets = ref<any[]>([])
 
 const page = ref(1)
 const pageSize = 10
 
 const ticketStore = useTicketsStore()
-const formatDate = (date: string) => new Date(date).toLocaleDateString()
+// const formatDate = (date: string) => new Date(date).toLocaleDateString()
+const formatDate = (dateStr: string) => {
+  console.log('formatDate called with:', dateStr)
+  const date = new Date(dateStr)
+  return date.toLocaleDateString() + ' ' + date.toLocaleTimeString()
+}
 
 const goToMyTickets = () => {
   router.push('/my-tickets')

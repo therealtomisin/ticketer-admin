@@ -16,13 +16,18 @@
       class="w-full p-2 border rounded"
     />
     <button type="submit" class="bg-indigo-600 text-white px-4 py-2 rounded">Sign Up</button>
+
+    <p class="text-sm text-gray-600">
+      Already have an account?
+      <span @click="pushToLogin" class="text-indigo-600 hover:underline">Login</span>
+    </p>
   </form>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { useAuthStore } from '@/stores/auth'
+import { useAuthStore } from '../../stores/auth'
 
 const email = ref('')
 const password = ref('')
@@ -31,6 +36,10 @@ const firstName = ref('')
 const lastName = ref('')
 const router = useRouter()
 const auth = useAuthStore()
+
+const pushToLogin = () => {
+  router.push('/login')
+}
 
 const handleSignup = async () => {
   if (password.value !== confirmPassword.value) {
