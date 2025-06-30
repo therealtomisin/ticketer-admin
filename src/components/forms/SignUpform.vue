@@ -19,7 +19,7 @@
 
     <p class="text-sm text-gray-600">
       Already have an account?
-      <span @click="pushToLogin" class="text-indigo-600 hover:underline">Login</span>
+      <a href="/login" class="text-indigo-600 hover:underline">Login</a>
     </p>
   </form>
 </template>
@@ -36,10 +36,6 @@ const firstName = ref('')
 const lastName = ref('')
 const router = useRouter()
 const auth = useAuthStore()
-
-const pushToLogin = () => {
-  router.push('/login')
-}
 
 const handleSignup = async () => {
   if (password.value !== confirmPassword.value) {
