@@ -31,5 +31,4 @@ coverage
 
 # Environment files
 .env
-.env.*
 !.env.example  # Keep example files
