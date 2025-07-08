@@ -4,6 +4,5 @@
       "source": "/(.*)",
       "destination": "/index.html"
     }
-  ],
-  "ignoreCommand": "if [ \"$VERCEL_GIT_COMMIT_REF\" != \"main\" ]; then echo 'Ignoring non-main branch'; exit 0; fi"
+  ]
 }
