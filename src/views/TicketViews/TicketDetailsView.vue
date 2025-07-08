@@ -111,7 +111,6 @@ const newComment = ref('')
 const editingStatus = ref(false)
 const localStatus = ref<string>('') // For status editing
 
-// Use computed property for reactive ticket data
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const ticket = computed<any | null>(() => ticketStore.ticket)
 
