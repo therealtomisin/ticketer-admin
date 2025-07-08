@@ -7,30 +7,6 @@
 
       <div class="text-sm text-gray-500">Ticket Key: {{ ticket?.ticketKey ?? '' }}</div>
 
-      <!-- <div class="flex items-center space-x-2 text-sm">
-        <span>Status:</span>
-        <div v-if="!editingStatus" class="cursor-pointer" @click="editingStatus = true">
-          <span
-            class="px-2 py-1 rounded-full text-xs font-medium"
-            :class="statusColor(ticket.status)"
-          >
-            {{ ticket.status }}
-          </span>
-        </div>
-        <select
-          v-else
-          v-model="ticket.status"
-          @blur="editingStatus = false"
-          class="text-sm border rounded px-2 py-1 focus:outline-none"
-        >
-          <option value="UNASSIGNED" @click="updateTicket(ticket.id, { status: 'UNASSIGNED' })">
-            UNASSIGNED
-          </option>
-          <option value="ACTIVE">ACTIVE</option>
-          <option value="CLOSED">CLOSED</option>
-        </select>
-      </div> -->
-
       <div class="flex items-center space-x-2 text-sm">
         <span>Status:</span>
         <div v-if="!editingStatus" class="cursor-pointer" @click="editingStatus = true">
@@ -68,21 +44,6 @@
     <!-- Comments Chat Section -->
     <div class="bg-white p-4 rounded-2xl shadow space-y-4 max-h-[400px] overflow-y-auto">
       <h3 class="text-lg font-semibold">Conversation</h3>
-      <!-- <div v-for="comment in ticket.comments" :key="comment.id" class="flex mb-3">
-        <div
-          :class="[
-            'p-3 rounded-lg text-sm max-w-[80%]',
-            comment.createdByType === 'Agent'
-              ? 'ml-auto bg-blue-100 text-blue-800'
-              : 'mr-auto bg-gray-100 text-gray-700',
-          ]"
-        >
-          {{ comment.content }}
-          <div class="text-xs text-gray-400 mt-1 text-right">
-            {{ formatDate(comment.created_at) }}
-          </div>
-        </div>
-      </div> -->
       <div v-for="comment in ticket.comments" :key="comment.id" class="flex mb-3">
         <div
           :class="[
@@ -138,87 +99,10 @@
   </div>
 </template>
 
-<!-- <script setup lang="ts">
-import { useTicketsStore } from '@/stores/tickets'
-import { computed, onMounted, ref } from 'vue'
-import { useRoute } from 'vue-router'
-
-const route = useRoute()
-const ticketStore = useTicketsStore()
-const ticketId = Number(route.params.id)
-// const ticket = ref()
-const ticket = computed(() => ticketStore.ticket)
-const newComment = ref('')
-const editingStatus = ref(false)
-
-console.log('thic ticket >>> ', ticket)
-
-const formatDate = (dateStr: string) => {
-  const date = new Date(dateStr)
-  return date.toLocaleString()
-}
-
-// Assign color classes to statuses
-const statusColor = (status: string) => {
-  switch (status) {
-    case 'ACTIVE':
-      return 'bg-yellow-100 text-yellow-800'
-    case 'CLOSED':
-      return 'bg-green-100 text-green-800'
-    case 'UNASSIGNED':
-    default:
-      return 'bg-gray-100 text-gray-700'
-  }
-}
-
-const addComment = async () => {
-  try {
-    console.log('the ticket is >> ', ticket.value.id)
-    console.log(newComment.value)
-    await ticketStore.createComment(ticket.value.id, newComment.value || '', 'Agent')
-    newComment.value = '' // Clear input after successful submission
-  } catch (error) {
-    console.error('Failed to post comment:', error)
-    // Show error message to user
-  }
-  // if (!newComment.value.trim()) return
-
-  // ticket.value.comments.push({
-  //   id: Date.now(),
-  //   senderType: 'User',
-  //   content: newComment.value,
-  //   ticketId: ticket.value.id,
-  //   // created_at: new Date().toISOString(),
-  // })
-  // newComment.value = ''
-}
-
-const updateTicket = async (id: number, update: any) => {
-  try {
-    ticket.value.status = update.status
-    await ticketStore.updateTicket(id, update)
-  } catch (e) {}
-}
-
-onMounted(async () => {
-  await ticketStore.fetchTicket(ticketId)
-  // ticket = ticketStore.ticket
-
-  console.log(ticketStore.ticket)
-})
-</script> -->
 <script setup lang="ts">
 import { useTicketsStore } from '@/stores/tickets'
 import { computed, onMounted, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
-
-// interface Comment {
-//   id: number | string
-//   content: string
-//   createdByType: 'Agent' | 'User'
-//   createdAt: string
-//   status?: 'pending'
-// }
 
 const route = useRoute()
 const ticketStore = useTicketsStore()
